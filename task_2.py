@@ -28,7 +28,9 @@ class Builder:
             n = n - randint(1,5)
             print('Строим')
         else:
-            print('Мы бомжи без пирамиды')
+            self.bricks -= n
+            self.my_pyramyd.add_bricks(n)
+            print('Мы бомжи без пирамиды') return False
     def work_day(self):
         self.day += 1
         print('День', self.day,
