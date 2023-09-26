@@ -2,6 +2,7 @@ from random import randint
 class Pyramyd:
     def __init__(self, max_h):
         self.max_h = max_h
+        self.h = max_h
         self.bricks_count = 0
         self.current_h = 0
 
@@ -18,15 +19,15 @@ class Builder:
     def __init__(self,n):
         self.day = 1
         self.bricks = n
-        self.my_pyramid = Pyramyd(5)
+        self.my_pyramid = Pyramyd(15)
     def buy_bricks(self,n):
         self.bricks += n
     def build_pyramid(self, n):
         if n > self.bricks:
             print('Ни хуя, ни пирамид')
-        elif self.bricks <= 15 and self.bricks != 0:
-            n = n - randint(1,5)
-            print('Строим')
+        elif self.bricks >= 5 and self.bricks == 0:
+            print('Научись считать от одного до пяти, придурок')
+            return False
         else:
             self.bricks -= n
             self.my_pyramyd.add_bricks(n)
@@ -34,10 +35,11 @@ class Builder:
     def work_day(self):
         self.day += 1
         print('День', self.day,
-              'За день', 
+              'За день', a, 'кирпичей', 
               'Количество кирпичей',
-              'Процент работы', self.my_pyramid.is_done())
+              'Готовность работы', self.my_pyramid.is_done())
         if self.my_pyramid.is_done() == 100:
+            print()
             print('Сосите члены')
             return False
 
