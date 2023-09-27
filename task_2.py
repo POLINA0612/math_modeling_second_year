@@ -1,5 +1,5 @@
 from random import randint
-class Pyramyd:
+class Pyramid:
     def __init__(self, max_h):
         self.max_h = max_h
         self.h = max_h
@@ -16,37 +16,46 @@ class Pyramyd:
         return int(self.current_h * 100 / self.max_h)
 
 class Builder:
-    def __init__(self,n):
+    def __init__(self, max_h, n):
         self.day = 1
         self.bricks = n
-        self.my_pyramid = Pyramyd(15)
-    def buy_bricks(self,n):
-        self.bricks += n
+        self.my_pyramid = Pyramid(15)
+        self.max_h = max_h
+        self.h = max_h
+        
+    def buy_bricks(self):
+        n = randint(1,5)
+        if self.bricks + n <= 15:
+            self.bricks += n
     def build_pyramid(self, n):
+        n = randint(1,5)
         if n > self.bricks:
-            print('Ни хуя, ни пирамид')
+            print('Нет пирамиды')
+            self.buy_bricks()
             return False
         elif self.bricks >= 5 and self.bricks == 0:
             print('Научись считать от одного до пяти, придурок')
             return False
         else:
             self.bricks -= n
-            self.my_pyramyd.add_bricks(n)
+            self.my_pyramid.add_bricks(n)
             print('Типо строим')
             return False
     def work_day(self):
-        self.day += 1
-        a = randint(1, 5)
-        print('День', self.day,
-              'За день', a, 'кирпичей', 
-              'Количество кирпичей', self.bricks,
-              'Готовность работы', self.my_pyramid.is_done())
-        if self.my_pyramid.is_done() == 100:
+        while self.my_pyramid.is_done() != 100:
+            self.day += 1
+            a = randint(1, 5)
+            if self.my_pyramid.max_h < self.my_pyramid.h:
+                print('Помянем')
+            else:
+                print('День', self.day,
+                    'За день', a, 'кирпичей', 
+                    'Количество кирпичей', self.bricks,
+                    'Готовность работы', self.my_pyramid.is_done())
+            self.build_pyramid(a)
             print()
-            print('Сосите члены')
-            return False
 
-b = Builder(15)
+b = Builder(15,15)
 
 while True:
     b.work_day()
