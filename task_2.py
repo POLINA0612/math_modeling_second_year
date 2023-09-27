@@ -25,18 +25,21 @@ class Builder:
     def build_pyramid(self, n):
         if n > self.bricks:
             print('Ни хуя, ни пирамид')
+            return False
         elif self.bricks >= 5 and self.bricks == 0:
             print('Научись считать от одного до пяти, придурок')
             return False
         else:
             self.bricks -= n
             self.my_pyramyd.add_bricks(n)
-            print('Мы бомжи без пирамиды') return False
+            print('Типо строим')
+            return False
     def work_day(self):
         self.day += 1
+        a = randint(1, 5)
         print('День', self.day,
               'За день', a, 'кирпичей', 
-              'Количество кирпичей',
+              'Количество кирпичей', self.bricks,
               'Готовность работы', self.my_pyramid.is_done())
         if self.my_pyramid.is_done() == 100:
             print()
