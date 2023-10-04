@@ -1,4 +1,6 @@
 from random import randint
+
+
 class Pyramid:
     def __init__(self, max_h):
         self.max_h = max_h
@@ -17,6 +19,7 @@ class Pyramid:
 
     def is_done(self):
         return int(self.current_h * 100 / self.max_h)
+
 
 class Builder:
     def __init__(self, max_h,n):
@@ -76,8 +79,8 @@ class Builder:
     def exit(self):
         print('Офигеть, вышло')
 
-b = Builder(15,15)
 
+b = Builder(15,15)
 while True:
     b.work_day()
     break
