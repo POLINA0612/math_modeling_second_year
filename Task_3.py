@@ -25,7 +25,7 @@ class Tomato_bush:
     def __init__(self, n):
         self.n = n
         self.tomatoes = [Senior_tomato() for i in range(self.n)]
-    def grow_all(self, n):
+    def grow_all(self):
         for tomato in self.tomatoes:
             tomato.grow()
     def all_are_ripe(self):
@@ -33,8 +33,8 @@ class Tomato_bush:
         for tomato in self.tomatoes:
            if tomato.is_ripe() == 1:
                 k += 1
-                print('Папой клянусь, всё созрело')
         if k == len(self.tomatoes):
+            print('Папой клянусь, всё созрело')
             return True
         return False
     def give_away_all(self):
