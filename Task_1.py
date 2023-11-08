@@ -1,17 +1,23 @@
 from random import randint 
 class Human:
-    default_name = input()
-    default_age = input()
+    default_name = 'Art'
+    default_age = 71
     def __init__(self, name=default_name, age=default_age):
         self.name = name
         self.age = age
         self._own_home = 0
+        print('Введите материальное состояние:')
         self._money = input()
 
     def info(self):
         print(self.name)
         print(self.age)
         print(self._money)
+    
+    @staticmethod
+    def default_info():
+        print(Human.default_name)
+        print(Human.default_age)
     
     def _make_deal(self, house):
         self._own_home += 1
@@ -30,14 +36,25 @@ class House:
         self._area = area
         self._price = price
     
-    def final_price(self, price):
-        self.price = price * (1 - 0,35)
+    def final_price(self, _price):
+        self.price = _price * (1 - 0,35)
     
 
 class SmallHouse(House):
-    def __init__(self, area, price):
-        super().__init__(area, price)
+    def __init__(self, area, _price):
+        super().__init__(area, _price)
         self.area = 40
 
-human = Human()
+human = Human('Gayorgie', 20)
 
+human.info()
+human.default_info()
+
+House = SmallHouse(70, 23534853)
+human.buy_house(House)
+
+human.earn_money()
+
+human.buy_house(House)
+
+human.info()
