@@ -7,7 +7,7 @@ class Human:
         self.age = age
         self._own_home = 0
         print('Введите материальное состояние:')
-        self._money = input()
+        self._money = int(input())
 
     def info(self):
         print(self.name)
@@ -27,8 +27,8 @@ class Human:
         self._money += randint(100000, 99999999)
     
     def buy_house(self, house):
-        if self._money - house._price > 0:
-            self._make_deal()
+        if int(self._money) - int(house._price) > 0:
+            self._make_deal(house)
     
 
 class House:
@@ -45,16 +45,16 @@ class SmallHouse(House):
         super().__init__(area, _price)
         self.area = 40
 
-human = Human('Gayorgie', 20)
+human = Human('Giorgia', 20)
 
 human.info()
 human.default_info()
 
-House = SmallHouse(70, 23534853)
-human.buy_house(House)
+house = SmallHouse(70, 23534853)
+human.buy_house(house)
 
 human.earn_money()
 
-human.buy_house(House)
+human.buy_house(house)
 
 human.info()
