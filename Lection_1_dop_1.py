@@ -1,65 +1,68 @@
-# Задача заключается в создании имитации движения автомобиля и велосипеда.
+# 1.Создайте класс BankAccount, который будет иметь следующие свойства: account_number, balance, owner, type. Также, класс должен иметь следующие методы: deposit(), withdraw(), check_balance(), change_owner().
 
-# 1. Создайте базовый класс `Vehicle`, который будет иметь следующие методы:
-#    - `__init__`: принимает название транспорта и инициализирует список движений и время.
-#    - `_move`: имитирует движение транспорта, записывает движение в список и увеличивает время.
-#    - `get_moves`: возвращает список движений.
-#    - `get_time`: возвращает общее время движения.
+#     - Метод deposit() должен принимать один аргумент amount и добавлять это количество к балансу счета.
 
-# 2. Создайте два дочерних класса `Car` и `Bicycle`, которые наследуют от `Vehicle`.
+#     - Метод withdraw() должен принимать один аргумент amount и вычитать это количество из баланса счета. Перед вычитанием проверьте, достаточно ли средств на счете. Если средств недостаточно, выведите сообщение об ошибке.
 
-# 3. В методе `_move` каждого из дочерних классов вызывайте метод `_move` базового класса, а затем добавляйте в список движений сообщение о движении.
+#     - Метод check_balance() должен возвращать текущий баланс счета.
 
-# 4. Создайте два объекта классов `Car` и `Bicycle`.
+#     - Метод change_owner() должен принимать один аргумент new_owner и изменять владельца счета на нового владельца.
 
-# 5. Для каждого из объектов выполните три движения, выведите сообщения о движении и выведите список движений и общее время движения для каждого объекта.
+# 2.Создайте несколько объектов класса BankAccount и вызовите каждый из методов для каждого из объектов.
+
+# 3.Добавьте в класс BankAccount метод transfer(), который будет принимать два аргумента: amount и other_account. Этот метод должен переводить указанную сумму со счета на other_account. Проверьте, достаточно ли средств на счете для перевода. Если средств недостаточно, выведите сообщение об ошибке.
+
+# 4.Создайте еще один объект класса BankAccount и используйте метод transfer() для перевода средств с одного счета на другой
 
 
-import time
+class BankAccount:
+    def __init__(self, account_number, balance, owner, type):
+        self.account_number = account_number
+        self.balance = balance
+        self.owner = owner
+        self.type = type
 
-class Vehicle:
-    def __init__(self, name):
-        self._name = name
-        self._moves = []
-        self._time = 0.
+    def deposit(self, amount):
+        self.balance += amount
+        print(f"Депозит на сумму {amount} успешно открыт. Новый баланс составляет {self.balance}")
 
-    def _move(self):
-        start_time = time.time()
-        self._moves.append(self._name + ' is moving.')
-        time.sleep(1)  # Simulate time spent moving
-        end_time = time.time()
-        self._time += end_time - start_time
+    def withdraw(self, amount):
+        if self.balance < amount:
+            print("Недостаточно средств")
+        else:
+            self.balance -= amount
+            print(f"Снятие {amount} успешно завершено. Новый баланс составляет {self.balance}")
 
-    def get_moves(self):
-        return self._moves
+    def check_balance(self):
+        print(f"Текущий баланс: {self.balance}")
 
-    def get_time(self):
-        return self._time
+    def change_owner(self, new_owner):
+        self.owner = new_owner
+        print(f"Смена владельца счёта. Новый владелец {new_owner}")
 
-class Car(Vehicle):
-    def __init__(self, name):
-        super().__init__(name)
+    def transfer(self, amount, other_account):
+        if self.balance < amount:
+            print("Недостаточно средств для перевода")
+        else:
+            self.balance -= amount
+            other_account.balance += amount
+            print(f"Перевод в размере {amount} успешно завершён. Новый баланс составляет {self.balance}")
 
-    def _move(self):
-        super()._move()
-        return self._name + ' is moving.'
+# Creating objects of BankAccount class
+account1 = BankAccount("123456", 1000, "John Doe", "Savings")
+account2 = BankAccount("654321", 2000, "Jane Doe", "Current")
 
-class Bicycle(Vehicle):
-    def __init__(self, name):
-        super().__init__(name)
+# Calling methods on account1
+account1.deposit(500)
+account1.withdraw(200)
+account1.check_balance()
+account1.change_owner("Иван")
 
-    def _move(self):
-        super()._move()
-        return self._name + ' is moving.'
+# Calling methods on account2
+account2.deposit(1000)
+account2.withdraw(300)
+account2.check_balance()
+account2.change_owner("Олег")
 
-car = Car('Tesla')
-bicycle = Bicycle('BMX')
-
-for _ in range(3):
-    print(car._move())
-    print(bicycle._move())
-
-print(car.get_moves())
-print(bicycle.get_moves())
-print(car.get_time())
-print(bicycle.get_time())
+# Transferring money from account1 to account2
+account1.transfer(300, account2)
