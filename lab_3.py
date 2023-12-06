@@ -7,4 +7,4 @@ def square_root(x):
     else:
         print(x ** 0.5)
 
-square_root(33)
+square_root(-33)
