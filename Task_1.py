@@ -1,4 +1,5 @@
 from random import randint 
+
 class Human:
     default_name = 'Art'
     default_age = 71
@@ -29,16 +30,14 @@ class Human:
     def buy_house(self, house):
         if int(self._money) - int(house._price) > 0:
             self._make_deal(house)
-    
 
 class House:
     def __init__(self, area, price):
         self._area = area
         self._price = price
     
-    def final_price(self, _price):
-        self.price = _price * (1 - 0,35)
-    
+    def final_price(self):
+        return self._price * (1 - 0.35)
 
 class SmallHouse(House):
     def __init__(self, area, _price):
